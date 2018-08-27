@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import {InputSideContainer} from './containers'
-
+import { connect } from 'react-redux';
 class App extends Component {
   render() {
     return (
@@ -13,4 +13,5 @@ class App extends Component {
   }
 }
 
-export default App;
+const connectedApp = connect()(App);
+export { connectedApp as App };
