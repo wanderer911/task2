@@ -17,20 +17,10 @@ class InputSideContainer extends React.Component {
         this.checkboxOnChange = this.checkboxOnChange.bind(this);
         this.changeColorBackgroundFront = this.changeColorBackgroundFront.bind(this);
         this.state = {
-            // firstName: '',
-            // lastName: '',
-            // title: '',
-            // telephone: '',
-            // email: '',
-            // frontSideBackgroundcolor: '#FFFFFF',
             isOpenFullScreenModal: false,
             isOpenBackgroundModal: false,
             isBackgroundTabOpen:false
         };
-    }
-    componentDidMount(){
-        this.props.dispatch(formActions.getInputValues())
-        this.props.dispatch(visibilityActions.getAllVisibilities);
     }
     inputOnChange(e){
         const {name,value} = e.target;
@@ -50,7 +40,7 @@ class InputSideContainer extends React.Component {
         
     }
     render(){
-        const {firstName,lastName,title,telephone,email,frontBackgroundColor} = this.props.form;
+        const {name,lastName,title,telephone,email,frontBackgroundColor} = this.props.form;
         const {frontVisilibility} = this.props.visibility;
         const setState = state => () => this.setState(state);
         const closeFullScreenModal = setState({isOpenFullScreenModal: false});
@@ -61,7 +51,7 @@ class InputSideContainer extends React.Component {
         <div>
             <TextField required>
                 <label  appearance="T1.1" for="nameame">Name</label>
-                <Input  onChange={this.inputOnChange}  placeholder="Please type in your first name" name="name" value={firstName}></Input>
+                <Input  onChange={this.inputOnChange}  placeholder="Please type in your first name" name="name" value={name}></Input>
             </TextField>
             <TextField required>
                 <label  appearance="T1.1" for="lastName">Last name</label>

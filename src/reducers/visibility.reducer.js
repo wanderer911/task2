@@ -13,8 +13,6 @@ export function visibility(state=initialState,action){
             return {...state,frontVisilibility: !state.frontVisilibility}
         case visibilityContants.TOGGLE_SIDE:
             return {...state,sideVisibility: !state.sideVisibility}
-        case visibilityContants.GET_ALL_VISIBILITIES:
-            return state;
         default:
             return state;
     }
