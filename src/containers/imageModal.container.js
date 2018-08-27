@@ -4,8 +4,10 @@ import Input from 'wix-style-react/Input';
 import TextField from 'wix-style-react/TextField';
 import _ from 'lodash';
 import {ImageListComponent} from '../components/imageList.component';
+import { connect } from 'react-redux';
+import { formActions,visibilityActions} from '../actions'
 
-export class ImageModalContainer extends React.Component {
+class ImageModalContainer extends React.Component {
     constructor(props){
         super(props);
         this.inputOnChange = this.inputOnChange.bind(this);
@@ -20,6 +22,7 @@ export class ImageModalContainer extends React.Component {
     }
     onImageSelect(e){
         this.setState({currentlySelectedImg:e.target.src});
+        this.props.dispatch(formActions.changeInputValue(this.props.imageType,e.target.src))
         console.log(e.target.src)
     }
     inputOnChange(e){
@@ -51,6 +54,10 @@ export class ImageModalContainer extends React.Component {
     }
 }
 
+
+
+const connectedImageModalContainer = connect()(ImageModalContainer);
+export {connectedImageModalContainer as ImageModalContainer};
 
 function toUrl(data){
     return `https://farm${data.farm}.staticflickr.com/${data.server}/${data.id}_${data.secret}.jpg`;

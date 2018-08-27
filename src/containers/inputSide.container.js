@@ -40,7 +40,7 @@ class InputSideContainer extends React.Component {
         
     }
     render(){
-        const {name,lastName,title,telephone,email,frontBackgroundColor} = this.props.form;
+        const {name,lastName,title,telephone,email,frontBackgroundColor,logo,frontBackgroundImage} = this.props.form;
         const {frontVisilibility} = this.props.visibility;
         const setState = state => () => this.setState(state);
         const closeFullScreenModal = setState({isOpenFullScreenModal: false});
@@ -58,7 +58,8 @@ class InputSideContainer extends React.Component {
                 <Input  onChange={this.inputOnChange}  placeholder="Please type in your last name" name="lastName" value={lastName}></Input>
             </TextField>
             <div>
-                <div style={{float:'left',height:'50px',width:'50px',backgroundColor:"green"}}></div>
+                {!logo &&<div style={{float:'left',height:'50px',width:'50px','background-color':"green"}}></div>}
+                {logo &&<img src={logo }style={{float:'left',height:'50px',width:'50px'}}/>}
                 <p>Logo </p>
                 <Button onClick={openFullScreenModal} dataHook="open-full-screen-modal-button">Choose</Button>
                 <Modal
@@ -76,7 +77,7 @@ class InputSideContainer extends React.Component {
                         theme="blue"
                         title="Full screen modal"
                         >
-                       <ImageModalContainer/>
+                       <ImageModalContainer imageType='logo'/>
                     </MessageBoxFunctionalLayout>
                 </Modal>
             </div>
@@ -109,7 +110,8 @@ class InputSideContainer extends React.Component {
                     <label  for="isBackgroundTabOpen">Color</label>
                 </div>
                 <div>
-                    <div style={{float:'left',height:'50px',width:'50px',backgroundColor:"yellow"}}></div>
+                    {!frontBackgroundImage && <div style={{float:'left',height:'50px',width:'50px',backgroundColor:frontBackgroundColor}}></div>}
+                    {frontBackgroundImage && <img src={frontBackgroundImage} style={{float:'left',height:'50px',width:'50px'}}/>}
                     <p>Image </p>
                     <Button onClick={openBackgroundModal} dataHook="open-background-modal-button">Choose</Button>
                     <Modal
@@ -127,7 +129,7 @@ class InputSideContainer extends React.Component {
                             theme="blue"
                             title="Full screen modal"
                             >
-                            <ImageModalContainer/>
+                            <ImageModalContainer imageType='frontBackgroundImage'/>
                         </MessageBoxFunctionalLayout>
                     </Modal>
                 </div>
@@ -144,15 +146,6 @@ const mapStateToProps = (state) => ({
     form: state.form,
     visibility: state.visibility
 })
-
-// const mapDispatchToProps = dispatch => ({
-	// onPeriodChange: (e) => dispatch(forecastPeriodActions.set(e)),
-	// getPeriod: () => dispatch(forecastPeriodActions.get()),
-	// onScaleChange: () => dispatch(scaleActions.toggle()),
-    // fetchScale: () => dispatch(scaleActions.get()) ,
-//     getInputValues:()=>dispatch(formActions.getInputValues()),
-//     dispatch:()
-// });
 
 const connectedInputSideContainer = connect(mapStateToProps)(InputSideContainer);
 export {connectedInputSideContainer as InputSideContainer};
