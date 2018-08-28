@@ -22,6 +22,7 @@ class InputSideContainer extends React.Component {
             isBackgroundTabOpen:false
         };
     }
+    
     inputOnChange(e){
         const {name,value} = e.target;
         const {dispatch} = this.props;
@@ -37,8 +38,8 @@ class InputSideContainer extends React.Component {
         const color = e.hex();
         const {dispatch} = this.props;
         dispatch(formActions.changeInputValue('frontBackgroundColor',color));
-        
     }
+
     render(){
         const {name,lastName,title,telephone,email,frontBackgroundColor,logo,frontBackgroundImage} = this.props.form;
         const {frontVisilibility} = this.props.visibility;
@@ -50,7 +51,7 @@ class InputSideContainer extends React.Component {
         return (
         <div>
             <TextField required>
-                <label  appearance="T1.1" for="nameame">Name</label>
+                <label  appearance="T1.1" for="name">Name</label>
                 <Input  onChange={this.inputOnChange}  placeholder="Please type in your first name" name="name" value={name}></Input>
             </TextField>
             <TextField required>
@@ -135,9 +136,6 @@ class InputSideContainer extends React.Component {
                 </div>
             </div>
             }
-        <div style={{'margin-top':'20px'}}> 
-            <Button onClick={console.log} >Go to BS</Button>
-            <Button onClick={console.log} >Finish</Button></div>
         </div>)
     }
 }
