@@ -5,7 +5,7 @@ export const visibilityActions = {
     toggleFrontVisibility,
     toggleBackVisibility,
     toggleSideVisibility,
-    getAllVisibilities
+    //getAllVisibilities
 }
 
 
@@ -28,8 +28,8 @@ function toggleSideVisibility(){
     }
 }
 
-function getAllVisibilities(){
-    return dispatch=>{
-        dispatch({type: visibilityContants.GET_ALL_VISIBILITIES})
-    }
-}
+// function getAllVisibilities(){
+//     return dispatch=>{
+//         dispatch({type: visibilityContants.GET_ALL_VISIBILITIES})
+//     }
+// }
