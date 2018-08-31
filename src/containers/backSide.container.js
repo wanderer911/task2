@@ -26,7 +26,6 @@ class BackSideContainer extends React.Component {
         console.log(name,value);
         dispatch(formActions.changeInputValue(name,value));
     }
-    //hello world commit
     checkboxOnChange(){
         const {dispatch} = this.props;
         dispatch(visibilityActions.toggleBackVisibility());
