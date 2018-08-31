@@ -1,4 +1,3 @@
 export * from './form.actions'
-export * from './visibility.actions'
-
+export * from './flickr.actions'
 

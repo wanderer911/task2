@@ -1,10 +1,10 @@
-import { combineReducers } from 'redux';
-import { form } from './form.reducer';
-import { visibility } from './visibility.reducer';
+import { combineReducers } from 'redux'
+import { form } from './form.reducer'
+import { flickr } from './flickr.reducer'
 
 const rootReducer = combineReducers({
     form,
-    visibility
+    flickr
 });
 
 export default rootReducer;

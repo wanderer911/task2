@@ -12,7 +12,7 @@ class ImageModalContainer extends React.Component {
         super(props);
         this.inputOnChange = this.inputOnChange.bind(this);
         this.fetchByTag = this.fetchByTag.bind(this);
-        this.throttled =  _.throttle(this.fetchByTag,2000).bind(this);
+        this.throttled =  _.throttle(this.fetchByTag,2000).bind(this); //here
         this.onImageSelect = this.onImageSelect.bind(this);
         this.state = {
             searchKeyWord:'',
@@ -25,9 +25,9 @@ class ImageModalContainer extends React.Component {
         this.props.dispatch(formActions.changeInputValue(this.props.imageType,e.target.src))
         console.log(e.target.src)
     }
+
     inputOnChange(e){
         const {name,value} = e.target;
-        // console.log(name,value,this.state);
         this.setState({ [name]: value });
         this.throttled(event.target.value);
     }
@@ -41,15 +41,14 @@ class ImageModalContainer extends React.Component {
     }
     render(){
         const {searchKeyWord,urls,currentlySelectedImg} = this.state;
+        const 
         return (
         <div>    
             <TextField required>
                 <label  appearance="T1.1" for="lastName">Last name</label>
                 <Input  onChange={this.inputOnChange}  placeholder="Please type in your last name" name="searchKeyWord" value={searchKeyWord}></Input>
             </TextField>
-            {urls.length &&
-                urls.map(url=><ImageListComponent onClick={this.onImageSelect} url={url} selectedUrl={currentlySelectedImg}/>)
-            }
+            <ImageListComponent onClick={this.onImageSelect} images={images} selectedImage={currentlySelectedImg}/>
         </div>)
     }
 }

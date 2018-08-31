@@ -1,6 +1,8 @@
 import React from 'react'
 
 
-export const ImageListComponent = props=>{
-    return <img src={props.url} className={props.url === props.selectedUrl?'selectedImage':''} onClick={props.onClick}/>
-}
+export const ImageListComponent = props=>(
+    props.images.map(image=>{
+        <img src={image} className={image === props.selectedImage?'selectedImage':''} onClick={props.onClick}/>
+    })
+)

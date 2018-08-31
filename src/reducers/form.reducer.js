@@ -11,8 +11,12 @@ const initialState = {
     frontBackgroundImage: undefined,
     companyName: '',
     backBackroundColor: '#FFFFFF',
-    backBackgroundImage: undefined
+    backBackgroundImage: undefined,
+    isFrontSideBackgroundImage: false,
+    isBackSideBackgroundImage: false,
+    isFrontSideSelected: true
 }
+
 export function form(state=initialState,action){
     switch(action.type){
         case formConstants.CHANGE_INPUT_VALUE:
