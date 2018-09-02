@@ -1,16 +1,27 @@
-import React, { Component } from 'react';
-import './App.css';
-import {InputSideContainer} from './containers'
+import React, { Component } from 'react'
+import { ResulstSideContainer, LeftSideContainer } from './containers'
 
-class App extends Component {
+
+export class App extends Component {
+  constructor(props){
+    super(props)
+    this.showFinal = this.showFinal.bind(this)
+    this.state = {
+      finalShowed: false,
+      containerClass: 'result-container'
+    }
+  }
+  showFinal(){
+    console.log('final click')
+    this.setState({finalShowed: true,containerClass: 'result-container-final'})
+  }
   render() {
+    const {showFinal,state:{containerClass,finalShowed}} = this
     return (
-      <div className="App">
-        <InputSideContainer/>
-        <div>Hello world</div>
+      <div className="grid">
+        {!finalShowed && <LeftSideContainer onFinalClick={showFinal}/>}
+        <ResulstSideContainer containerClass={containerClass}/>
       </div>
-    );
+    )
   }
 }
-
-export default App;
