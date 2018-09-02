@@ -27,10 +27,10 @@ class BackSideContainer extends React.Component {
     changeColorBackgroundBack(e){
         const color = e.hex()
         const {dispatch} = this.props
-        dispatch(formActions.changeInputValue('backBackroundColor',color));
+        dispatch(formActions.changeInputValue('backBackroundColor',color))
     }
     render(){
-        const {companyName,backBackroundColor,backBackgroundImage,isBackSideBackground} = this.props.form;
+        const {companyName,backBackroundColor,backBackgroundImage,isBackSideBackground} = this.props.form
         return (<div>
             <TextField required>
                 <label  appearance="T1.1" for="companyName">Company</label>
@@ -38,7 +38,7 @@ class BackSideContainer extends React.Component {
             </TextField>
             <div>
                 <label  for="isBackgroundTabOpen">Background</label>
-                <input type="checkbox" onChange={this.checkboxOnChange} name="isBackSideBackground" value={isBackSideBackground}/>
+                <input type="checkbox" onChange={this.checkboxOnChange} name="isBackSideBackground" checked={isBackSideBackground}/>
             </div>
             {isBackSideBackground && 
             <BackgroundContainer color={backBackroundColor} image={backBackgroundImage} imageType='backBackgroundImage' changeColorBackground={this.changeColorBackgroundBack}/>}
