@@ -9,7 +9,7 @@ export const flickrActions = {
 
 function fetchByTag(tag) {
     return async dispatch => {
-        
+
         try {
             dispatch({ type: flickrConstants.FETCH_BY_TAG_REQUEST })
             const json = await searchPhotoService.fetchByTag(tag)
