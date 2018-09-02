@@ -9,7 +9,7 @@ class ResulstSideContainer extends React.Component {
     render(){
         const { name,lastName,logo,telephone,email,title,frontBackgroundColor,frontBackgroundImage,companyName,backBackroundColor,backBackgroundImage} = this.props.form;
         return (
-            <div>
+            <div className="right" >
                 <div style={{width:'400px',height:'250px',margin:'20px 0 20px 0',
                 'background-color':frontBackgroundColor,border:'1px solid black','background-image':frontBackgroundImage?`url(${frontBackgroundImage})`:''}}>
                     {logo&& 

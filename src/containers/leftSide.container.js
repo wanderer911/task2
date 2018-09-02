@@ -1,8 +1,9 @@
 import React from 'react'
 import {InputSideContainer,BackSideContainer} from './'
-import Button from 'wix-style-react/Button';
-import {visibilityActions} from '../actions'
-import { connect } from 'react-redux';
+import Button from 'wix-style-react/Button'
+import {formActions} from '../actions'
+import { connect } from 'react-redux'
+
 class LeftSideContainer extends React.Component {
     constructor(props){
         super(props)
@@ -10,11 +11,11 @@ class LeftSideContainer extends React.Component {
 
     render(){
         const {toggleSideVisibility} = this.props;
-        const {sideVisibility} = this.props.visibility;
-        return (<div>
-            {sideVisibility? <InputSideContainer/>:<BackSideContainer/>}
+        const {isFrontSideSelected} = this.props.form;
+        return (<div  className="left">
+            {isFrontSideSelected? <InputSideContainer/>:<BackSideContainer/>}
             <div style={{'margin-top':'20px'}}> 
-                <Button onClick={toggleSideVisibility} >Go to BS</Button>
+                <Button onClick={toggleSideVisibility} >{isFrontSideSelected?'Go to BS':'Go to FS'}</Button>
                 <Button onClick={console.log} >Finish</Button>
             </div>
         </div>)
@@ -23,13 +24,12 @@ class LeftSideContainer extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-    form: state.form,
-    visibility: state.visibility
+    form: state.form
 })
 
-const mapDispatchToProps = dispatch => ({
-	toggleSideVisibility: () => dispatch(visibilityActions.toggleSideVisibility()) 
-});
+const mapDispatchToProps = (dispatch,currentState) => ({
+	toggleSideVisibility: () => dispatch(formActions.changeInputValue('isFrontSideSelected',!currentState().form.isFrontSideSelected)) 
+})
 
-const connectedLeftSideContainer = connect(mapStateToProps,mapDispatchToProps)(LeftSideContainer);
-export {connectedLeftSideContainer as LeftSideContainer};
+const connectedLeftSideContainer = connect(mapStateToProps,mapDispatchToProps)(LeftSideContainer)
+export {connectedLeftSideContainer as LeftSideContainer}

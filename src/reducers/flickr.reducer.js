@@ -5,9 +5,11 @@ export function flickr(state = {}, action) {
         case flickrConstants.FETCH_BY_TAG_REQUEST:
             return { loading: true }
         case flickrConstants.FETCH_BY_TAG_ERROR:
-            return { loading: false, error: action.error }
+            return {  error: action.error }
         case flickrConstants.FETCH_BY_TAG_SUCCESS:
-            return { loading: false, images: action.images }
+            return { images: action.images }
+        case flickrConstants.CLEAR_IMAGES_ARRAY:
+            return {}
         default:
             return state
     }

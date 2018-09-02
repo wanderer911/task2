@@ -4,7 +4,7 @@ import {ResulstSideContainer,LeftSideContainer} from './containers'
 export class App extends Component {
   render() {
     return (
-      <div>
+      <div className="grid">
         <LeftSideContainer/>
         <ResulstSideContainer/>
       </div>

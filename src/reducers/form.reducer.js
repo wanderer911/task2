@@ -12,8 +12,8 @@ const initialState = {
     companyName: '',
     backBackroundColor: '#FFFFFF',
     backBackgroundImage: undefined,
-    isFrontSideBackgroundImage: false,
-    isBackSideBackgroundImage: false,
+    isFrontSideBackground: false,
+    isBackSideBackground: false,
     isFrontSideSelected: true
 }
 

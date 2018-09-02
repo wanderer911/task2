@@ -3,17 +3,28 @@ import { searchPhotoService } from '../services'
 
 
 export const flickrActions = {
-    fetchByTag
+    fetchByTag,
+    clearImagesArray
 }
 
-async function fetchByTag(tag) {
-    return dispatch => {
-        dispatch({ type: flickrConstants.FETCH_BY_TAG_REQUEST });
+function fetchByTag(tag) {
+    return async dispatch => {
+        
         try {
-            const images = await searchPhotoService.fetchByTag(tag);
-            dispatch({ type: flickrConstants.FETCH_BY_TAG_SUCCESS, images });
+            dispatch({ type: flickrConstants.FETCH_BY_TAG_REQUEST })
+            const json = await searchPhotoService.fetchByTag(tag)
+            const images = json.photos.photo.slice(0, 10).map(toUrl)
+            dispatch({ type: flickrConstants.FETCH_BY_TAG_SUCCESS, images })
         } catch (error) {
-            dispatch({ type: flickrConstants.FETCH_BY_TAG_ERROR, error });
+            dispatch({ type: flickrConstants.FETCH_BY_TAG_ERROR, error })
         }
     }
+}
+
+function clearImagesArray() {
+    return { type: flickrConstants.CLEAR_IMAGES_ARRAY }
+}
+
+function toUrl(data) {
+    return `https://farm${data.farm}.staticflickr.com/${data.server}/${data.id}_${data.secret}.jpg`;
 }
