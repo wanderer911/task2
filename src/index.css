@@ -17,3 +17,45 @@ img {
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
 }
+.right {
+  padding:5px;
+}
+.left {
+  padding:5px;
+}
+.margin-top20 {
+  margin-top:20px;
+}
+
+.result-container {
+  width: 400px;
+  height: 250px; 
+  margin: 20px 0 20px 0;
+  border: 1px solid black
+}
+
+.result-container-final {
+  width: 800px;
+  height: 500px; 
+  margin: 20px 0 20px 0;
+  border: 1px solid black
+}
+.logo {
+  height: 100px;
+  width:150px;
+  float:left;
+}
+
+.contacts{
+  margin-top:50px;
+  clear:both;
+}
+
+.mini-image {
+  float: left;
+  height: 50px;
+  width: 50px;
+}
+.lastName {
+  margin-left: 5px;
+}

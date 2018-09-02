@@ -19,13 +19,12 @@ class LeftSideContainer extends React.Component {
     }
 
     render() {
-        const { toggleSideVisibility } = this
-        const { isFrontSideSelected } = this.props.form
+        const { toggleSideVisibility, props:{onFinalClick, form: { isFrontSideSelected } }} = this
         return (<div className="left">
             {isFrontSideSelected ? <InputSideContainer /> : <BackSideContainer />}
-            <div style={{ 'margin-top': '20px' }}>
+            <div className="margin-top20 ">
                 <Button onClick={toggleSideVisibility} >{isFrontSideSelected ? 'Go to BS' : 'Go to FS'}</Button>
-                <Button onClick={console.log} >Finish</Button>
+                <Button onClick={onFinalClick} >Finish</Button>
             </div>
         </div>)
     }
