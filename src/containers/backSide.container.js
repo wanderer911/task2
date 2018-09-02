@@ -8,16 +8,16 @@ import {BackgroundContainer} from './'
 class BackSideContainer extends React.Component {
     constructor(props){
         super(props)
-        this.inputOnChange = this.inputOnChange.bind(this);
-        this.checkboxOnChange = this.checkboxOnChange.bind(this);
-        this.changeColorBackgroundBack = this.changeColorBackgroundBack.bind(this);
+        this.inputOnChange = this.inputOnChange.bind(this)
+        this.checkboxOnChange = this.checkboxOnChange.bind(this)
+        this.changeColorBackgroundBack = this.changeColorBackgroundBack.bind(this)
 
     }
     inputOnChange(e){
-        const {name,value} = e.target;
-        const {dispatch} = this.props;
-        console.log(name,value);
-        dispatch(formActions.changeInputValue(name,value));
+        const {name,value} = e.target
+        const {dispatch} = this.props
+        console.log(name,value)
+        dispatch(formActions.changeInputValue(name,value))
     }
     checkboxOnChange(){
         const {dispatch} = this.props
@@ -25,8 +25,8 @@ class BackSideContainer extends React.Component {
     }
 
     changeColorBackgroundBack(e){
-        const color = e.hex();
-        const {dispatch} = this.props;
+        const color = e.hex()
+        const {dispatch} = this.props
         dispatch(formActions.changeInputValue('backBackroundColor',color));
     }
     render(){
@@ -51,5 +51,5 @@ const mapStateToProps = (state) => ({
     form: state.form,
 })
 
-const connectedBackSideContainer = connect(mapStateToProps)(BackSideContainer);
-export {connectedBackSideContainer as BackSideContainer};
+const connectedBackSideContainer = connect(mapStateToProps)(BackSideContainer)
+export {connectedBackSideContainer as BackSideContainer}

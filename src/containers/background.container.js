@@ -1,25 +1,35 @@
-import React from 'react';
-import Button from 'wix-style-react/Button';
+import React from 'react'
+import Button from 'wix-style-react/Button'
 import Modal from 'wix-style-react/Modal'
-import ColorPicker from 'wix-style-react/ColorPicker';
-import {MessageBoxFunctionalLayout} from 'wix-style-react/MessageBox';
-import {ImageModalContainer} from './imageModal.container';
+import ColorPicker from 'wix-style-react/ColorPicker'
+import {MessageBoxFunctionalLayout} from 'wix-style-react/MessageBox'
+import {ImageModalContainer} from './imageModal.container'
+import { flickrActions} from '../actions'
+import { connect } from 'react-redux'
 
-export class BackgroundContainer extends React.Component {
+class BackgroundContainer extends React.Component {
     constructor(props){
         super(props)
+        this.closeModal = this.closeModal.bind(this)
         this.state = {
             isOpenBackgroundModal: false,
             isBackgroundTabOpen:false
         }
     }
+    
+    closeModal(){
+        const {dispatch} = this.props
+        this.setState({isOpenBackgroundModal: false})
+        dispatch(flickrActions.clearImagesArray())
+    }
+
     render(){
         const {changeColorBackground,imageType,image,color} = this.props
+        const {closeModal} = this
         const setState = state => () => this.setState(state)
         const openBackgroundModal = setState({isOpenBackgroundModal: true})
-        const closeBackgroundModal = setState({isOpenBackgroundModal: false})
         return (<div>
-            <div>
+            {color && <div>
                 <ColorPicker
                     onCancel={() => "Cancelled"}
                     onChange={e => e.hex()}
@@ -28,15 +38,15 @@ export class BackgroundContainer extends React.Component {
                     value={color}
                 />
                 <label  for="isBackgroundTabOpen">Color</label>
-            </div>
+            </div>}
             <div>
-                {!image && <div style={{float:'left',height:'50px',width:'50px',backgroundColor:color}}></div>}
+                {!image && <div style={{float:'left',height:'50px',width:'50px',backgroundColor:color?color:'green'}}></div>} {/* if no image show just green square in input part*/}
                 {image && <img src={image} style={{float:'left',height:'50px',width:'50px'}}/>}
                 <p>Image </p>
                 <Button onClick={openBackgroundModal} dataHook="open-background-modal-button">Choose</Button>
                 <Modal
                     isOpen={this.state.isOpenBackgroundModal}
-                    onRequestClose={closeBackgroundModal}
+                    onRequestClose={closeModal}
                     contentLabel="Background modal example"
                     >
                     <MessageBoxFunctionalLayout
@@ -44,8 +54,8 @@ export class BackgroundContainer extends React.Component {
                         confirmText="OK"
                         dataHook="background-modal"
                         fullscreen
-                        onCancel={closeBackgroundModal}
-                        onOk={closeBackgroundModal}
+                        onCancel={closeModal}
+                        onOk={closeModal}
                         theme="blue"
                         title="Full screen modal"
                         >
@@ -58,10 +68,8 @@ export class BackgroundContainer extends React.Component {
 }
 
 
-
-
-
-
+const connectedBackgroundContainer = connect()(BackgroundContainer)
+export {connectedBackgroundContainer as BackgroundContainer}
 
 
 

@@ -1,1 +1,1 @@
-export * from './searchPhoto.service';
+export * from './searchPhoto.service'

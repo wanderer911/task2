@@ -1,13 +1,13 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 
 class ResulstSideContainer extends React.Component {
     constructor(props){
-        super(props);
+        super(props)
     }
     //
     render(){
-        const { name,lastName,logo,telephone,email,title,frontBackgroundColor,frontBackgroundImage,companyName,backBackroundColor,backBackgroundImage} = this.props.form;
+        const { name,lastName,logo,telephone,email,title,frontBackgroundColor,frontBackgroundImage,companyName,backBackroundColor,backBackgroundImage} = this.props.form
         return (
             <div className="right" >
                 <div style={{width:'400px',height:'250px',margin:'20px 0 20px 0',
@@ -36,6 +36,6 @@ const mapStateToProps = (state) => ({
 })
 
 
-const connectedResulstSideContainer = connect(mapStateToProps)(ResulstSideContainer);
-export {connectedResulstSideContainer as ResulstSideContainer};
+const connectedResulstSideContainer = connect(mapStateToProps)(ResulstSideContainer)
+export {connectedResulstSideContainer as ResulstSideContainer}
 

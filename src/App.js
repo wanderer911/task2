@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
 import {ResulstSideContainer,LeftSideContainer} from './containers'
 export class App extends Component {
   render() {
@@ -8,6 +8,6 @@ export class App extends Component {
         <LeftSideContainer/>
         <ResulstSideContainer/>
       </div>
-    );
+    )
   }
 }

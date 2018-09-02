@@ -4,8 +4,7 @@ export const formActions = {
     changeInputValue,
 }
 
-
 function changeInputValue(name,value){
-    return {type:formConstants.CHANGE_INPUT_VALUE,[name]:value};
+    return {type:formConstants.CHANGE_INPUT_VALUE,[name]:value}
 }
 

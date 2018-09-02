@@ -26,5 +26,5 @@ function clearImagesArray() {
 }
 
 function toUrl(data) {
-    return `https://farm${data.farm}.staticflickr.com/${data.server}/${data.id}_${data.secret}.jpg`;
+    return `https://farm${data.farm}.staticflickr.com/${data.server}/${data.id}_${data.secret}.jpg`
 }

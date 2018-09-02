@@ -1,5 +1,6 @@
 import { flickrConstants } from '../constants'
 
+
 export function flickr(state = {}, action) {
     switch (action.type) {
         case flickrConstants.FETCH_BY_TAG_REQUEST:

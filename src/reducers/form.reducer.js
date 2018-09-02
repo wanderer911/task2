@@ -23,6 +23,6 @@ export function form(state=initialState,action){
             const key = Object.keys(action)[1]
             return  {...state,[key]:action[key]}
         default:
-            return state;
+            return state
     }
 }
