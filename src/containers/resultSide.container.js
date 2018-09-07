@@ -14,7 +14,7 @@ class ResulstSideContainer extends React.Component {
                 <div className={containerClass} style={{'background-color': frontBackgroundColor, 'background-image': frontBackgroundImage ? `url(${frontBackgroundImage})` : ''}}>
                     {logo &&
                         <img src={logo} className="logo" />}
-                    <p>{name} <span className="lastName">{lastName}</span></p>
+                    <p data-hook="name-preview">{name} <span className="lastName">{lastName}</span></p>
                     <p>{title}</p>
                     <div className="contacts">
                         <p>{telephone}</p>

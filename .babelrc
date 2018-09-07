@@ -2,6 +2,13 @@
     "presets":[
         "es2017", "react"
     ],
-    "plugins": ["transform-object-rest-spread"]
-
+    "plugins": ["transform-object-rest-spread"],
+    "env": {
+        "test": {
+            "presets":[
+                "es2017", "react"
+            ],
+            "plugins": ["transform-es2015-modules-commonjs"]
+        }
+    }
 }
