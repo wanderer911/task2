@@ -5,12 +5,11 @@ import { App } from './App'
 import { store } from './helpers'
 import { Provider } from 'react-redux'
 
-export default document => {
+export default () => 
     ReactDOM.render(
         <Provider store={store}>
           <App />
         </Provider>,
         document.getElementById('root'))
-}
 
 

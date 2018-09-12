@@ -16,7 +16,6 @@ class BackSideContainer extends React.Component {
     inputOnChange(e) {
         const { name, value } = e.target
         const { dispatch } = this.props
-        console.log(name, value)
         dispatch(formActions.changeInputValue(name, value))
     }
     checkboxOnChange() {

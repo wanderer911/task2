@@ -15,11 +15,10 @@ class InputSideContainer extends React.Component {
     }
 
     inputOnChange(e) {
-        console.log('inputOnChange')
-        // const { name, value } = e.target
-        // const { dispatch } = this.props
-        // console.log('inputOnChange', name, value)
-        // dispatch(formActions.changeInputValue(name, value))
+        const { name, value } = e.target
+        const { dispatch } = this.props
+        console.log(name, value)
+        dispatch(formActions.changeInputValue(name, value))
     }
 
     checkboxOnChange() {
@@ -36,11 +35,14 @@ class InputSideContainer extends React.Component {
     render() {
         const { name, lastName, title, telephone, email, frontBackgroundColor, logo, frontBackgroundImage, isFrontSideBackground } = this.props.form
         return (
-            <div>
-                <input onChange={this.inputOnChange} placeholder="Please type in your first name" name="name" value={name} data-hook="name-input"/>
+            <div data-hook="input-side">
+                <TextField required>
+                    <label appearance="T1.1" for="name">Name</label>
+                    <Input onChange={this.inputOnChange} placeholder="Please type in your first name" name="name" value={name} dataHook="first-name"></Input>
+                </TextField>
                 <TextField required>
                     <label appearance="T1.1" for="lastName">Last name</label>
-                    <Input onChange={this.inputOnChange} placeholder="Please type in your last name" name="lastName" value={lastName}></Input>
+                    <Input onChange={this.inputOnChange} placeholder="Please type in your last name" name="lastName" value={lastName} dataHook="last-name"></Input>
                 </TextField>
                 <BackgroundContainer color={false} image={logo} imageType='logo' changeColorBackground={false} />
                 <TextField required>
@@ -71,8 +73,3 @@ const mapStateToProps = (state) => ({
 
 const connectedInputSideContainer = connect(mapStateToProps)(InputSideContainer)
 export { connectedInputSideContainer as InputSideContainer }
-
-{/* <TextField required>
-                    <label appearance="T1.1" for="name">Name</label>
-                    <Input onChange={this.inputOnChange} placeholder="Please type in your first name" name="name" value={name} dataHook="name-input"></Input>
-                </TextField> */}

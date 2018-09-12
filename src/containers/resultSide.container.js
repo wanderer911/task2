@@ -10,18 +10,18 @@ class ResulstSideContainer extends React.Component {
         const {containerClass} = this.props
         const { name, lastName, logo, telephone, email, title, frontBackgroundColor, frontBackgroundImage, companyName, backBackroundColor, backBackgroundImage } = this.props.form
         return (
-            <div className="right" >
-                <div className={containerClass} style={{'background-color': frontBackgroundColor, 'background-image': frontBackgroundImage ? `url(${frontBackgroundImage})` : ''}}>
+            <div className="right" data-hook="preview">
+                <div className={containerClass} style={{'backgroundColor': frontBackgroundColor, 'backgroundImage': frontBackgroundImage ? `url(${frontBackgroundImage})` : ''}}>
                     {logo &&
                         <img src={logo} className="logo" />}
-                    <p data-hook="name-preview">{name} <span className="lastName">{lastName}</span></p>
+                    <p data-hook="name">{name}<span className="lastName">{lastName ? ' ' + lastName : ''}</span></p>
                     <p>{title}</p>
                     <div className="contacts">
                         <p>{telephone}</p>
                         <p>{email}</p>
                     </div>
                 </div>
-                <div className={containerClass} style={{'background-color': backBackroundColor, 'background-image': backBackgroundImage ? `url(${backBackgroundImage})` : '' }}>
+                <div className={containerClass} style={{'backgroundColor': backBackroundColor, 'backgroundImage': backBackgroundImage ? `url(${backBackgroundImage})` : '' }}>
                     <p>{companyName}</p>
                 </div>
             </div>
