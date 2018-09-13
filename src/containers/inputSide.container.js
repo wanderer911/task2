@@ -47,7 +47,7 @@ class InputSideContainer extends React.Component {
                 <BackgroundContainer color={false} image={logo} imageType='logo' changeColorBackground={false} />
                 <TextField required>
                     <label appearance="T1.1" for="title">Title</label>
-                    <Input onChange={this.inputOnChange} placeholder="Please type in title" name="title" value={title}></Input>
+                    <Input onChange={this.inputOnChange} placeholder="Please type in title" name="title" value={title} dataHook="title"></Input>
                 </TextField>
                 <TextField required>
                     <label appearance="T1.1" for="telephone">telephone</label>

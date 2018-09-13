@@ -15,7 +15,7 @@ class ResulstSideContainer extends React.Component {
                     {logo &&
                         <img src={logo} className="logo" />}
                     <p data-hook="name">{name}<span className="lastName">{lastName ? ' ' + lastName : ''}</span></p>
-                    <p>{title}</p>
+                    <p data-hook="title">{title}</p>
                     <div className="contacts">
                         <p>{telephone}</p>
                         <p>{email}</p>
