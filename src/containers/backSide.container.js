@@ -30,17 +30,17 @@ class BackSideContainer extends React.Component {
     }
     render() {
         const { companyName, backBackroundColor, backBackgroundImage, isBackSideBackground } = this.props.form
-        return (<div>
+        return (<div data-hook="back-side">
             <TextField required>
-                <label appearance="T1.1" for="companyName">Company</label>
-                <Input onChange={this.inputOnChange} placeholder="Please type in your company" name="companyName" value={companyName}></Input>
+                <label for="companyName">Company</label>
+                <Input onChange={this.inputOnChange} placeholder="Please type in your company" name="companyName" value={companyName} dataHook="companyName-input"></Input>
             </TextField>
             <div>
                 <label for="isBackgroundTabOpen">Background</label>
-                <input type="checkbox" onChange={this.checkboxOnChange} name="isBackSideBackground" checked={isBackSideBackground} />
+                <input type="checkbox" onChange={this.checkboxOnChange} name="isBackSideBackground" checked={isBackSideBackground} data-hook="isBackSideBackground-checkbox"/>
             </div>
             {isBackSideBackground &&
-                <BackgroundContainer color={backBackroundColor} image={backBackgroundImage} imageType='backBackgroundImage' changeColorBackground={this.changeColorBackgroundBack} />}
+                <BackgroundContainer color={backBackroundColor} image={backBackgroundImage} imageType='backBackgroundImage' changeColorBackground={this.changeColorBackgroundBack}/>}
         </div>)
     }
 }

@@ -1,4 +1,4 @@
-const triggerEvent = require('../triggerEvent')
+const triggerEvent = require('../../triggerEvent')
 
 module.exports = el => ({
   setValue: value => {

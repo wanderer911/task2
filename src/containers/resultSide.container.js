@@ -13,16 +13,19 @@ class ResulstSideContainer extends React.Component {
             <div className="right" data-hook="preview">
                 <div className={containerClass} style={{'backgroundColor': frontBackgroundColor, 'backgroundImage': frontBackgroundImage ? `url(${frontBackgroundImage})` : ''}}>
                     {logo &&
-                        <img src={logo} className="logo" />}
-                    <p data-hook="name">{name}<span className="lastName">{lastName ? ' ' + lastName : ''}</span></p>
-                    <p data-hook="title">{title}</p>
+                        <img src={logo} className="logo" data-hook="logo-img"/>}
+                    <p data-hook="full-name-text">
+                        <span data-hook="first-name-text">{name}</span>
+                        <span className="lastName" data-hook="last-name-text">{lastName ? ' ' + lastName : ''}</span>
+                    </p>
+                    <p data-hook="title-text">{title}</p>
                     <div className="contacts">
-                        <p>{telephone}</p>
-                        <p>{email}</p>
+                        <p data-hook="telephone-text">{telephone}</p>
+                        <p data-hook="email-text">{email}</p>
                     </div>
                 </div>
                 <div className={containerClass} style={{'backgroundColor': backBackroundColor, 'backgroundImage': backBackgroundImage ? `url(${backBackgroundImage})` : '' }}>
-                    <p>{companyName}</p>
+                    <p data-hook="companyName-text">{companyName}</p>
                 </div>
             </div>
         )

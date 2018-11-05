@@ -28,7 +28,7 @@ class BackgroundContainer extends React.Component {
         const { closeModal } = this
         const setState = state => () => this.setState(state)
         const openBackgroundModal = setState({ isOpenBackgroundModal: true })
-        return (<div>
+        return (<div data-hook={imageType}>
             {color && <div>
                 <ColorPicker
                     onCancel={() => "Cancelled"}
