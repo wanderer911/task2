@@ -25,9 +25,18 @@ describe('Business Card Editor', () => {
     businessCardDriver = businessCardEditorDriverCreator(root)
     inputSideDriver = businessCardDriver.getInputSideDriver()
     previewDriver = businessCardDriver.getPreviewDriver()
-    //backSideDriver = businessCardDriver.getBackSideDriver()
+    backSideDriver = businessCardDriver.getBackSideDriver()
     leftSideDriver = businessCardDriver.getLeftSideDriver()
   })
+
+  // afterEach(()=>{
+  //   const root = document.getElementById('root')
+  //   root.innerHTML = ''
+  // })
+
+  // afterEach(() => {
+  //   document.body.innerHTML = ''
+  //  })
 
   test('should show first name on preview after it was entered on input side', async function () {
     inputSideDriver.setFirstName(person.firstName)
@@ -40,8 +49,9 @@ describe('Business Card Editor', () => {
   })
 
   test('should show full name on preview after it was entered on input side', async function () {
-    inputSideDriver.setFirstName(person.firstName)
-    inputSideDriver.setLastName(person.lastName)
+    // inputSideDriver.setFirstName(person.firstName)
+    // inputSideDriver.setLastName(person.lastName)
+    //THIS TEST SHOULD FALL IF IT AUTOCLEANS AFTER EACH TEST
     await eventually(() => expect(previewDriver.getFullName()).toEqual(person.firstName + ' ' + person.lastName))
   })
 

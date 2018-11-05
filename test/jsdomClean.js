@@ -1,5 +1,5 @@
 const { unmountComponentAtNode } = require('react-dom')
-
+const App = require('../src/App');
 beforeEach(() => {
   const newBody = document.createElement('body')
   document.body = newBody
@@ -14,3 +14,7 @@ afterEach(() => {
   const appDomNode = document.getElementById('root')
   unmountComponentAtNode(appDomNode)
 })
+
+  // afterEach(() => {
+  //   document.body.innerHTML = ''
+  //  })
