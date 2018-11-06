@@ -43,16 +43,17 @@ class BackgroundContainer extends React.Component {
                 {!image && <div className="mini-image" style={{ backgroundColor: color ? color : 'green' }}></div>} {/* if no image show just green square in input part*/}
                 {image && <img src={image} className="mini-image"/>}
                 <p>Image </p>
-                <Button onClick={openBackgroundModal} dataHook="open-background-modal-button">Choose</Button>
+                <Button onClick={openBackgroundModal} dataHook={"open-modal-"+imageType}>Choose</Button>
                 <Modal
                     isOpen={this.state.isOpenBackgroundModal}
                     onRequestClose={closeModal}
                     contentLabel="Background modal example"
+                    
                 >
                     <MessageBoxFunctionalLayout
                         cancelText="Cancel"
                         confirmText="OK"
-                        dataHook="background-modal"
+                        dataHook={imageType+'Modal'}
                         fullscreen
                         onCancel={closeModal}
                         onOk={closeModal}

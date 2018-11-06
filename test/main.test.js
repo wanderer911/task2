@@ -3,7 +3,7 @@ const renderApp = require('../src/root.js').default;
 const businessCardEditorDriverCreator = require('./drivers/businessCardEditorDriver')
 const eventually = require('./eventually')
 const store = require('../src/helpers')
-
+const byDataHook = require('./byDataHook')
 
 describe('Business Card Editor', () => {
   const person = {
@@ -20,8 +20,6 @@ describe('Business Card Editor', () => {
   let backSideDriver;
   let leftSideDriver;
   let appDriver;
-  let backgroundFrontDriver;
-  let logoFrontDriver;
   beforeEach(() => {
     renderApp()
     const root = document.getElementById('root')
@@ -31,10 +29,7 @@ describe('Business Card Editor', () => {
     backSideDriver = businessCardDriver.getBackSideDriver()
     leftSideDriver = businessCardDriver.getLeftSideDriver()
     appDriver = businessCardDriver.getApp()
-    backgroundFrontDriver = businessCardDriver.getBackgroundFront()
-    logoFrontDriver = businessCardDriver.getIconFront()
   })
-
   
   afterEach(() => {
     store.store.dispatch({ type: "CLEAR_STATE" });
@@ -94,16 +89,24 @@ describe('Business Card Editor', () => {
     await eventually(() => expect(appDriver.getLeftSide()).toBeFalsy())
   })
 
-  test('should check if icon box is visible, also if props are working in backgroundContainer',async function(){
-    await eventually(() => expect(logoFrontDriver.isVisible()).toBeTruthy())
+  test('should check if logo box is visible, also if props are working in backgroundContainer',async function(){
+    await eventually(() => expect(businessCardDriver.getBackgroundByHook('logo').isVisible()).toBeTruthy())
+  })
+  //document because modal is not in root
+  test('should open modal for logo',async function (){
+    businessCardDriver.getBackgroundByHook('logo').openModal('open-modal-logo')
+    await eventually(() => expect(byDataHook(document.body,('logoModal'))).toBeTruthy())
   })
 
-  test('background component should show up when checkbox is clicked in left side', async function (){
+  test('should open modal for logo',async function (){
+    await eventually(() => expect(byDataHook(document.body,('logoModal'))).toBeFalsy())
+  })
+
+  // //checkbox
+  test('background  {frontBackgroundImage} component should show up when checkbox is clicked in left side', async function (){
     inputSideDriver.showBackgroundHandlerContainer(true)
-    await eventually(() => expect(backgroundFrontDriver.isVisible()).toBeTruthy())
+    await eventually(() => expect(businessCardDriver.getBackgroundByHook('frontBackgroundImage').isVisible()).toBeTruthy())
   })
-
-
 
   // test('background component should show up when checkbox is clickes in left side', async function (){
   //   leftSideDriver.showBackgroundHandlerContainer(true)

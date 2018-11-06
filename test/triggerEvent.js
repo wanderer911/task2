@@ -10,11 +10,6 @@ module.exports = (el, eventName) => {
       bubbles: true,
       cancelable: true
     },
-    change: {
-      type: 'Events',
-      bubbles: true,
-      cancelable: true
-    },
     '@default': {
       type: 'HTMLEvents',
       bubbles: true,

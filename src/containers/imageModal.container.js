@@ -36,7 +36,7 @@ class ImageModalContainer extends React.Component {
     }
     render() {
         const { searchKeyWord, currentlySelectedImg } = this.state
-        const { flickr } = this.props
+        const { flickr,imageType } = this.props
         let result
         if (flickr.loading) {
             result = <p>Loading ...</p>
@@ -48,7 +48,7 @@ class ImageModalContainer extends React.Component {
             result = <p>No images to show</p>
         }
         return (
-            <div>
+            <div data-hook={'image-modal-'+imageType}>
                 <TextField required>
                     <label appearance="T1.1" for="lastName">Last name</label>
                     <Input onChange={this.inputOnChange} placeholder="Please type in your last name" name="searchKeyWord" value={searchKeyWord}></Input>

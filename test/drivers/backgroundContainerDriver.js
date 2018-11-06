@@ -3,20 +3,14 @@ const byDataHook = require('../byDataHook')
 // const checkboxDriver = require('./elementsDriver/checkboxDriver')
 const btnClickDriver = require('./elementsDriver/btnClickDriver')
 
-// module.exports = el => ({
-//   setCompanyName: value => textInputDriverCreator(byDataHook(el, 'companyName-input')).setValue(value),
-//   isVisible: (hook) => {
-//       return byDataHook(el,hook)}
-//       ,
-// //   showBackgroundHandlerContainer: value => checkboxDriver(el, 'frontVisilibility-checkbox').setValue(value)
-// //TODO btn click image choose trigger
-// })
-
-
 module.exports = el => {
-    console.log(el)
+    console.log(el?el.outerHTML:el)
     return {
-        setCompanyName: value => textInputDriverCreator(byDataHook(el, 'companyName-input')).setValue(value),
-        isVisible: () => el
+        isVisible: () => el,
+        openModal: (modalHook) =>  {
+            const btn = byDataHook(el,modalHook)
+            console.log(btn.outerHTML)
+            btnClickDriver(btn).triggerClick()
+        },
     }
 }
