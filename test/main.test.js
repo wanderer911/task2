@@ -2,6 +2,8 @@ require('./jsdomClean')
 const renderApp = require('../src/root.js').default;
 const businessCardEditorDriverCreator = require('./drivers/businessCardEditorDriver')
 const eventually = require('./eventually')
+const store = require('../src/helpers')
+
 
 describe('Business Card Editor', () => {
   const person = {
@@ -29,14 +31,11 @@ describe('Business Card Editor', () => {
     leftSideDriver = businessCardDriver.getLeftSideDriver()
   })
 
-  // afterEach(()=>{
-  //   const root = document.getElementById('root')
-  //   root.innerHTML = ''
-  // })
+  
 
-  // afterEach(() => {
-  //   document.body.innerHTML = ''
-  //  })
+  afterEach(() => {
+    store.store.dispatch({type:"CLEAR_STATE"});
+   })
 
   test('should show first name on preview after it was entered on input side', async function () {
     inputSideDriver.setFirstName(person.firstName)
@@ -48,12 +47,16 @@ describe('Business Card Editor', () => {
     await eventually(() => expect(previewDriver.getLastName().trim()).toEqual(person.lastName))
   })
 
+  test('should test that state is cleared after the each test', async function () {
+    await eventually(() => expect(previewDriver.getFullName().trim()).toEqual(''))
+  })
+
   test('should show full name on preview after it was entered on input side', async function () {
-    // inputSideDriver.setFirstName(person.firstName)
-    // inputSideDriver.setLastName(person.lastName)
-    //THIS TEST SHOULD FALL IF IT AUTOCLEANS AFTER EACH TEST
+    inputSideDriver.setFirstName(person.firstName)
+    inputSideDriver.setLastName(person.lastName)
     await eventually(() => expect(previewDriver.getFullName()).toEqual(person.firstName + ' ' + person.lastName))
   })
+
 
   test('should show title on preview after it was entered on input side', async function () {
     inputSideDriver.setTitle(person.title)
