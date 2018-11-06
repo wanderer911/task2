@@ -18,6 +18,5 @@ module.exports = el => {
     return {
         setCompanyName: value => textInputDriverCreator(byDataHook(el, 'companyName-input')).setValue(value),
         isVisible: () => el
-        
     }
 }

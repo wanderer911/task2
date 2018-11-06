@@ -21,7 +21,7 @@ describe('Business Card Editor', () => {
   let leftSideDriver;
   let appDriver;
   let backgroundFrontDriver;
-
+  let logoFrontDriver;
   beforeEach(() => {
     renderApp()
     const root = document.getElementById('root')
@@ -32,6 +32,7 @@ describe('Business Card Editor', () => {
     leftSideDriver = businessCardDriver.getLeftSideDriver()
     appDriver = businessCardDriver.getApp()
     backgroundFrontDriver = businessCardDriver.getBackgroundFront()
+    logoFrontDriver = businessCardDriver.getIconFront()
   })
 
   
@@ -93,10 +94,16 @@ describe('Business Card Editor', () => {
     await eventually(() => expect(appDriver.getLeftSide()).toBeFalsy())
   })
 
+  test('should check if icon box is visible, also if props are working in backgroundContainer',async function(){
+    await eventually(() => expect(logoFrontDriver.isVisible()).toBeTruthy())
+  })
+
   test('background component should show up when checkbox is clicked in left side', async function (){
     inputSideDriver.showBackgroundHandlerContainer(true)
     await eventually(() => expect(backgroundFrontDriver.isVisible()).toBeTruthy())
   })
+
+
 
   // test('background component should show up when checkbox is clickes in left side', async function (){
   //   leftSideDriver.showBackgroundHandlerContainer(true)

@@ -12,5 +12,6 @@ module.exports = el => ({
   getBackSideDriver: () => backSideDriver(byDataHook(el, 'back-side')),
   getLeftSideDriver: () => leftSideDriver(byDataHook(el,'left')),
   getApp: () => appDriver(byDataHook(el,'app')),
+  getIconFront: () => backgroundDriver(byDataHook(el,'logo')),
   getBackgroundFront: () => backgroundDriver(byDataHook(el,'frontBackgroundImage'))
 })
