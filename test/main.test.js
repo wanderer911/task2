@@ -19,7 +19,8 @@ describe('Business Card Editor', () => {
   let previewDriver;
   let backSideDriver;
   let leftSideDriver;
-
+  let appDriver;
+  let backgroundFrontDriver;
 
   beforeEach(() => {
     renderApp()
@@ -29,13 +30,14 @@ describe('Business Card Editor', () => {
     previewDriver = businessCardDriver.getPreviewDriver()
     backSideDriver = businessCardDriver.getBackSideDriver()
     leftSideDriver = businessCardDriver.getLeftSideDriver()
+    appDriver = businessCardDriver.getApp()
+    backgroundFrontDriver = businessCardDriver.getBackgroundFront()
   })
 
   
-
   afterEach(() => {
-    store.store.dispatch({type:"CLEAR_STATE"});
-   })
+    store.store.dispatch({ type: "CLEAR_STATE" });
+  })
 
   test('should show first name on preview after it was entered on input side', async function () {
     inputSideDriver.setFirstName(person.firstName)
@@ -73,10 +75,31 @@ describe('Business Card Editor', () => {
     await eventually(() => expect(previewDriver.getEmail()).toEqual(person.email))
   })
 
+  test('should show back side when button  go bs clicked', async function () {
+    leftSideDriver.changeSide()
+    await eventually(() => expect(leftSideDriver.getBackSide()).toBeTruthy())
+  })
 
-  //test('should show title on privew after entering title on input side', async () => {
-  //  inputSideDriver.setTitle('dev')
+  test('should show front side at the ', async function () {
+    await eventually(() => expect(leftSideDriver.getFrontSide()).toBeTruthy())
+  })
 
-  //  await eventually(() => expect(previewDriver.getTitle()).toEqual('dev'))
-  //})
+  test('should not show backside  because element is not visible', async function () {
+    await eventually(() => expect(leftSideDriver.getBackSide()).toBeFalsy())
+  })
+
+  test('should not show left side after finish is clicked', async function () {
+    leftSideDriver.clickFinal()
+    await eventually(() => expect(appDriver.getLeftSide()).toBeFalsy())
+  })
+
+  test('background component should show up when checkbox is clicked in left side', async function (){
+    inputSideDriver.showBackgroundHandlerContainer(true)
+    await eventually(() => expect(backgroundFrontDriver.isVisible()).toBeTruthy())
+  })
+
+  // test('background component should show up when checkbox is clickes in left side', async function (){
+  //   leftSideDriver.showBackgroundHandlerContainer(true)
+  //   await eventually(() => expect(backgroundDriver.isVisible('frontBackgroundImage')).toBeTruthy())
+  // })
 })

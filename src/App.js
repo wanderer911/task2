@@ -18,7 +18,7 @@ export class App extends Component {
   render() {
     const {showFinal,state:{containerClass,finalShowed}} = this
     return (
-      <div className="grid">
+      <div className="grid" data-hook="app">
         {!finalShowed && <LeftSideContainer onFinalClick={showFinal}/>}
         <ResulstSideContainer containerClass={containerClass}/>
       </div>

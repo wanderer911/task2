@@ -2,8 +2,10 @@ const triggerEvent = require('../../triggerEvent')
 
 module.exports = el => ({
   setValue: value => {
-    const input = el.querySelector('input')
-    input.checked = value
-    triggerEvent(input, 'change')
+    const checkbox = el.querySelector('input[type=checkbox]')
+    checkbox.checked = value;
+    // console.log(checkbox.outerHTML,checkbox.value)
+    // checkbox.value = 'off'
+    triggerEvent(checkbox, 'change')
   }
 })
