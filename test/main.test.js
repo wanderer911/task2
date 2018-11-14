@@ -2,6 +2,7 @@ require('./jsdomClean')
 const eventually = require('./eventually')
 const renderApp = require('../src/root.js').default
 const businessCardEditorDriverCreator = require('./drivers/bussinessCardEditorDriver')
+const store = require('../src/helpers')
 
 describe('Business Card Editor', () => {
   let businessCardDriver;
@@ -27,7 +28,7 @@ describe('Business Card Editor', () => {
 
 
   afterEach(() => {
-
+    store.store.dispatch({ type: "CLEAR_STATE" });
   })
 
   test('should show left side container when app loads', async function () {
