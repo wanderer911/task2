@@ -6,6 +6,7 @@ const businessCardEditorDriverCreator = require('./drivers/bussinessCardEditorDr
 describe('Business Card Editor', () => {
   let businessCardDriver;
   let appDriver;
+  let leftSideDriver;
 
   const person = {
     firstName: 'Andrii',
@@ -21,6 +22,7 @@ describe('Business Card Editor', () => {
     const root = document.getElementById('root')
     businessCardDriver = businessCardEditorDriverCreator(root)
     appDriver = businessCardDriver.getAppDriver()
+    leftSideDriver = businessCardDriver.getLeftSideDriver()
   })
 
 
@@ -36,4 +38,8 @@ describe('Business Card Editor', () => {
     await eventually(() => expect(appDriver.getResultSide()).toBeTruthy())
   })
 
+  test('should hide left side after  btn final was clicked',async function (){
+    leftSideDriver.clickFinishBtn()
+    await eventually(() => expect(appDriver.getLeftSide()).toBeFalsy())
+  })
 })
