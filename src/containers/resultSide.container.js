@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 
     render() {
         const {containerClass} = this.props
-        const { name, lastName, telephone, email, title, } = this.props.form
+        const { name, lastName, telephone, email, title, companyName } = this.props.form
         return (
             <div className="right" data-hook="result">
                 <div className={containerClass} >
@@ -22,6 +22,9 @@ import { connect } from 'react-redux'
                         <p data-hook="telephone-text">{telephone}</p>
                         <p data-hook="email-text">{email}</p>
                     </div>
+                </div>
+                <div className={containerClass}>
+                    <p data-hook="companyName-text">{companyName}</p>
                 </div>
             </div>
         )

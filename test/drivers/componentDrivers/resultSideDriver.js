@@ -7,4 +7,5 @@ module.exports = el => ({
   getTitle: () => byDataHook(el, 'title-text').textContent,
   getTelephone: () => byDataHook(el, 'telephone-text').textContent,
   getEmail: () => byDataHook(el, 'email-text').textContent,
+  getCompanyName: () => byDataHook(el,'companyName-text').textContent,
 })

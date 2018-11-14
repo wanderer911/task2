@@ -2,6 +2,12 @@ import { formConstants } from '../constants'
 
 const initialState = {
     isFrontSideSelected: true,
+    name: '',
+    lastName: '',
+    telephone: '',
+    email: '',
+    title: '',
+    companyName: '',
 }
 
 export function form(state = initialState, action) {

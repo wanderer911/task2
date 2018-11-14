@@ -10,6 +10,7 @@ describe('Business Card Editor', () => {
   let leftSideDriver;
   let inputSideDriver;
   let resultSideDriver;
+  let backSideDriver;
 
   const person = {
     firstName: 'Andrii',
@@ -28,6 +29,7 @@ describe('Business Card Editor', () => {
     leftSideDriver = businessCardDriver.getLeftSideDriver()
     inputSideDriver = businessCardDriver.getInputSideDriver()
     resultSideDriver = businessCardDriver.getResultSideDriver()
+    backSideDriver = businessCardDriver.getBackSideDriver()
   })
 
 
@@ -94,5 +96,11 @@ describe('Business Card Editor', () => {
   test('should show email  on preview after it was entered on input side', async function () {
     inputSideDriver.setEmail(person.email)
     await eventually(() => expect(resultSideDriver.getEmail()).toEqual(person.email))
+  })
+
+  test('should change company name in resultSide after companyName input changed',async function(){
+    leftSideDriver.clickToggleSideVisibility()
+    await eventually(() => backSideDriver.setCompanyName(person.companyName))
+    await eventually(() => expect(resultSideDriver.getCompanyName()).toEqual(person.companyName))
   })
 })
