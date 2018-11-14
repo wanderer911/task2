@@ -8,6 +8,8 @@ describe('Business Card Editor', () => {
   let businessCardDriver;
   let appDriver;
   let leftSideDriver;
+  let inputSideDriver;
+  let resultSideDriver;
 
   const person = {
     firstName: 'Andrii',
@@ -24,6 +26,8 @@ describe('Business Card Editor', () => {
     businessCardDriver = businessCardEditorDriverCreator(root)
     appDriver = businessCardDriver.getAppDriver()
     leftSideDriver = businessCardDriver.getLeftSideDriver()
+    inputSideDriver = businessCardDriver.getInputSideDriver()
+    resultSideDriver = businessCardDriver.getResultSideDriver()
   })
 
 
@@ -53,5 +57,42 @@ describe('Business Card Editor', () => {
     leftSideDriver.clickToggleSideVisibility()
     await eventually(() => expect(leftSideDriver.getInputSide()).toBeFalsy()) 
     await eventually(() => expect(leftSideDriver.getBackSide()).toBeTruthy())
+  })
+
+  test('should test that state is cleared after the each test', async function () {
+    await eventually(() => expect(resultSideDriver.getFullName().trim()).toEqual(''))
+  })
+
+  //input tests
+  test('should show first name on preview after it was entered on input side', async function () {
+    inputSideDriver.setFirstName(person.firstName)
+    await eventually(() => expect(resultSideDriver.getFirstName()).toEqual(person.firstName))
+  })
+
+  test('should show last name on preview after it was entered on input side', async function () {
+    inputSideDriver.setLastName(person.lastName)
+    await eventually(() => expect(resultSideDriver.getLastName().trim()).toEqual(person.lastName))
+  })
+
+  test('should show full name on preview after it was entered on input side', async function () {
+    inputSideDriver.setFirstName(person.firstName)
+    inputSideDriver.setLastName(person.lastName)
+    await eventually(() => expect(resultSideDriver.getFullName()).toEqual(person.firstName + ' ' + person.lastName))
+  })
+
+
+  test('should show title on preview after it was entered on input side', async function () {
+    inputSideDriver.setTitle(person.title)
+    await eventually(() => expect(resultSideDriver.getTitle()).toEqual(person.title))
+  })
+
+  test('should show telephone  on preview after it was entered on input side', async function () {
+    inputSideDriver.setTelephone(person.telephone)
+    await eventually(() => expect(resultSideDriver.getTelephone()).toEqual(person.telephone))
+  })
+
+  test('should show email  on preview after it was entered on input side', async function () {
+    inputSideDriver.setEmail(person.email)
+    await eventually(() => expect(resultSideDriver.getEmail()).toEqual(person.email))
   })
 })

@@ -1,16 +1,38 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 
-export class ResulstSideContainer extends React.Component {
+ class ResulstSideContainer extends React.Component {
     constructor(props) {
         super(props)
     }
 
     render() {
+        const {containerClass} = this.props
+        const { name, lastName, telephone, email, title, } = this.props.form
         return (
             <div className="right" data-hook="result">
-                Preview
+                <div className={containerClass} >
+                    <p data-hook="full-name-text">
+                        <span data-hook="first-name-text">{name}</span>
+                        <span className="lastName" data-hook="last-name-text">{lastName ? ' ' + lastName : ''}</span>
+                    </p>
+                    <p data-hook="title-text">{title}</p>
+                    <div className="contacts">
+                        <p data-hook="telephone-text">{telephone}</p>
+                        <p data-hook="email-text">{email}</p>
+                    </div>
+                </div>
             </div>
         )
     }
 }
+
+
+const mapStateToProps = (state) => ({
+    form: state.form,
+})
+
+
+const connectedResulstSideContainer = connect(mapStateToProps)(ResulstSideContainer)
+export { connectedResulstSideContainer as ResulstSideContainer }
