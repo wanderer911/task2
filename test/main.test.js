@@ -42,4 +42,15 @@ describe('Business Card Editor', () => {
     leftSideDriver.clickFinishBtn()
     await eventually(() => expect(appDriver.getLeftSide()).toBeFalsy())
   })
+
+  test('should show InputSideContainer based on default visibility',async function (){
+    await eventually(() => expect(leftSideDriver.getInputSide()).toBeTruthy()) 
+    await eventually(() => expect(leftSideDriver.getBackSide()).toBeFalsy())
+  })
+
+  test('should show BackSideContainer after toggleSideVisibility-button was clicked',async function (){
+    leftSideDriver.clickToggleSideVisibility()
+    await eventually(() => expect(leftSideDriver.getInputSide()).toBeFalsy()) 
+    await eventually(() => expect(leftSideDriver.getBackSide()).toBeTruthy())
+  })
 })
