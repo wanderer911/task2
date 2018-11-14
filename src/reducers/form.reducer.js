@@ -8,6 +8,7 @@ const initialState = {
     email: '',
     title: '',
     companyName: '',
+    logo: undefined,
 }
 
 export function form(state = initialState, action) {

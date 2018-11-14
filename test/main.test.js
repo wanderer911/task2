@@ -106,4 +106,8 @@ describe('Business Card Editor', () => {
       await eventually(() => expect(resultSideDriver.getCompanyName()).toEqual(person.companyName))
     }
   })
+
+  test('should have backgroundComponent with logo opened',async function (){
+    await eventually(() => expect(appDriver.getBackgroundComponentByHook('logo')).toBeTruthy())
+  })
 })
