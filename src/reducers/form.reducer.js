@@ -9,6 +9,7 @@ const initialState = {
     title: '',
     companyName: '',
     logo: undefined,
+    isFrontSideBackground: false,
 }
 
 export function form(state = initialState, action) {
