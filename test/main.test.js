@@ -100,7 +100,10 @@ describe('Business Card Editor', () => {
 
   test('should change company name in resultSide after companyName input changed',async function(){
     leftSideDriver.clickToggleSideVisibility()
-    await eventually(() => backSideDriver.setCompanyName(person.companyName))
-    await eventually(() => expect(resultSideDriver.getCompanyName()).toEqual(person.companyName))
+    const awaitBackSideRender = await eventually(() => expect(leftSideDriver.getBackSide()).toBeTruthy());
+    if(awaitBackSideRender){
+      backSideDriver.setCompanyName(person.companyName)
+      await eventually(() => expect(resultSideDriver.getCompanyName()).toEqual(person.companyName))
+    }
   })
 })
