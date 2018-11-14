@@ -9,7 +9,7 @@ export class BackgroundContainer extends React.Component {
         const {  imageType } = this.props
         return (
             <div data-hook={imageType}>
-                Hello background component
+                Hello background with {imageType}
             </div>
         )
     }

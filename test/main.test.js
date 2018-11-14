@@ -110,4 +110,11 @@ describe('Business Card Editor', () => {
   test('should have backgroundComponent with logo opened',async function (){
     await eventually(() => expect(appDriver.getBackgroundComponentByHook('logo')).toBeTruthy())
   })
+
+  test('should open BackgroundContainer for frontBackgroundImage after checkbox click',async function(){
+    inputSideDriver.toggleFrontSideBackground()
+    await eventually(() => expect(appDriver.getBackgroundComponentByHook('frontBackgroundImage')).toBeTruthy())
+  })
+
+
 })
