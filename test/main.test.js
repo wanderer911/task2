@@ -116,5 +116,13 @@ describe('Business Card Editor', () => {
     await eventually(() => expect(appDriver.getBackgroundComponentByHook('frontBackgroundImage')).toBeTruthy())
   })
 
+  test('should open BackgroundContainer on BackSide  for backBackgroundImage after checkbox clicked',async function (){
+    leftSideDriver.clickToggleSideVisibility()
+    const awaitBackSideRender = await eventually(() => expect(leftSideDriver.getBackSide()).toBeTruthy());
+    if(awaitBackSideRender){
+      backSideDriver.toggleBackSideBackground()
+      await eventually(() => expect(appDriver.getBackgroundComponentByHook('backBackgroundImage')).toBeTruthy())
+    }
+  })
 
 })
