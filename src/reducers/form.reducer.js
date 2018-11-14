@@ -10,6 +10,7 @@ const initialState = {
     companyName: '',
     logo: undefined,
     isFrontSideBackground: false,
+    isBackSideBackground: false,
 }
 
 export function form(state = initialState, action) {

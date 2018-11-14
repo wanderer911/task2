@@ -3,11 +3,13 @@ import TextField from 'wix-style-react/TextField'
 import Input from 'wix-style-react/Input'
 import { formActions } from '../actions'
 import { connect } from 'react-redux'
+import { BackgroundContainer } from './'
 
 class BackSideContainer extends React.Component {
     constructor(props){
         super(props)
         this.inputOnChange = this.inputOnChange.bind(this)
+        this.checkboxOnChange = this.checkboxOnChange.bind(this)
     }
 
     inputOnChange(e) {
@@ -16,13 +18,24 @@ class BackSideContainer extends React.Component {
         dispatch(formActions.changeInputValue(name, value))
     }
 
+    checkboxOnChange() {
+        const { dispatch } = this.props
+        dispatch(formActions.changeInputValue('isBackSideBackground', !this.props.form.isBackSideBackground))
+    }
+
     render(){
-        const { companyName } = this.props.form
+        const { companyName, isBackSideBackground } = this.props.form
         return (<div data-hook="back-side">
             <TextField required>
                 <label for="companyName">Company</label>
                 <Input onChange={this.inputOnChange} placeholder="Please type in your company" name="companyName" value={companyName} dataHook="companyName-input"></Input>
             </TextField>
+            <div>
+                <label for="isBackgroundTabOpen">Background</label>
+                <input type="checkbox" onChange={this.checkboxOnChange} name="isBackSideBackground" checked={isBackSideBackground} data-hook="isBackSideBackground-checkbox"/>
+            </div>
+{isBackSideBackground &&
+    <BackgroundContainer  imageType='backBackgroundImage'/>}
         </div>)
     }
 }
