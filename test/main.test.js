@@ -169,7 +169,7 @@ describe('Business Card Editor', () => {
   test('should open modal window for backBackground  image search',async function(){
     leftSideDriver.clickToggleSideVisibility()
     const awaitBackSideRender = await eventually(() => expect(leftSideDriver.getBackSide()).toBeTruthy());
-    while(awaitBackSideRender){
+    if(awaitBackSideRender){
       backSideDriver.toggleBackSideBackground()
       const awaitBackgroundRender =  await eventually(() => expect(appDriver.getBackgroundComponentByHook('backBackgroundImage')).toBeTruthy())
       if(awaitBackgroundRender){
