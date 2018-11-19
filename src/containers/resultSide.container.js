@@ -23,7 +23,7 @@ import { connect } from 'react-redux'
                         <p data-hook="email-text">{email}</p>
                     </div>
                 </div>
-                <div className={containerClass} data-hook="result-back">
+                <div className={containerClass} data-hook="result-back" style={{'backgroundColor': backBackroundColor}}>
                     <p data-hook="companyName-text">{companyName}</p>
                 </div>
             </div>
