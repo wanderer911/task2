@@ -9,10 +9,10 @@ import { connect } from 'react-redux'
 
     render() {
         const {containerClass} = this.props
-        const { name, lastName, telephone, email, title, companyName } = this.props.form
+        const { name, lastName, telephone, email, title, companyName,frontBackgroundColor,backBackroundColor } = this.props.form
         return (
             <div className="right" data-hook="result">
-                <div className={containerClass} data-hook="result-front">
+                <div className={containerClass} data-hook="result-front" style={{'backgroundColor': frontBackgroundColor}}>
                     <p data-hook="full-name-text">
                         <span data-hook="first-name-text">{name}</span>
                         <span className="lastName" data-hook="last-name-text">{lastName ? ' ' + lastName : ''}</span>

@@ -10,6 +10,7 @@ class InputSideContainer extends React.Component {
         super(props)
         this.inputOnChange = this.inputOnChange.bind(this)
         this.checkboxOnChange = this.checkboxOnChange.bind(this)
+        this.changeColorBackgroundFront = this.changeColorBackgroundFront.bind(this)
     }
 
     inputOnChange(e) {
@@ -24,8 +25,14 @@ class InputSideContainer extends React.Component {
         dispatch(formActions.changeInputValue('isFrontSideBackground', !isFrontSideBackground))
     }
 
+    changeColorBackgroundFront(e) {
+        const color = e.hex()
+        const { dispatch } = this.props
+        dispatch(formActions.changeInputValue('frontBackgroundColor', color))
+    }
+    
     render() {
-        const { name, lastName, title, telephone, email, logo,isFrontSideBackground } = this.props.form
+        const { name, lastName, title, telephone, email, logo,isFrontSideBackground,frontBackgroundColor } = this.props.form
         return (
             <div data-hook="input-side">
                 <TextField required>
@@ -54,7 +61,7 @@ class InputSideContainer extends React.Component {
                     <input type="checkbox" onChange={this.checkboxOnChange} checked={isFrontSideBackground} name="frontVisilibility" data-hook="frontVisilibility-checkbox"/>
                 </div>
                 {isFrontSideBackground &&
-                    <BackgroundContainer  imageType='frontBackgroundImage'/>}
+                    <BackgroundContainer  color={frontBackgroundColor} imageType='frontBackgroundImage' changeColorBackground={this.changeColorBackgroundFront}/>}
             </div>)
     }
 }

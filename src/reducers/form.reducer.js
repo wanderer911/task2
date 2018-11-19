@@ -11,6 +11,8 @@ const initialState = {
     logo: undefined,
     isFrontSideBackground: false,
     isBackSideBackground: false,
+    frontBackgroundColor: '#FFFFFF',
+    backBackroundColor: '#FFFFFF',
 }
 
 export function form(state = initialState, action) {

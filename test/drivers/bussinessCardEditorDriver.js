@@ -14,5 +14,3 @@ module.exports = el => ({
     getBackSideDriver: () => backSideDriver(byDataHook(el, 'back-side')),
     getBackgroundDriver: (hook) => backgroundDriver(byDataHook(el, hook))
 })
-
-backgroundDriver = businessCardDriver.getBackgroundDriver()
