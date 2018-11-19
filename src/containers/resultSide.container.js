@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
         const { name, lastName, telephone, email, title, companyName } = this.props.form
         return (
             <div className="right" data-hook="result">
-                <div className={containerClass} >
+                <div className={containerClass} data-hook="result-front">
                     <p data-hook="full-name-text">
                         <span data-hook="first-name-text">{name}</span>
                         <span className="lastName" data-hook="last-name-text">{lastName ? ' ' + lastName : ''}</span>
@@ -23,7 +23,7 @@ import { connect } from 'react-redux'
                         <p data-hook="email-text">{email}</p>
                     </div>
                 </div>
-                <div className={containerClass}>
+                <div className={containerClass} data-hook="result-back">
                     <p data-hook="companyName-text">{companyName}</p>
                 </div>
             </div>

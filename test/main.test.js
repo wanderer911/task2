@@ -11,6 +11,9 @@ describe('Business Card Editor', () => {
   let inputSideDriver;
   let resultSideDriver;
   let backSideDriver;
+  let backgroundDriverFront;
+  let backgroundDriverBack;
+  let backgroundDriverLogo;
 
   const person = {
     firstName: 'Andrii',
@@ -18,7 +21,8 @@ describe('Business Card Editor', () => {
     title: 'Developer',
     telephone: '+380679986400',
     email: 'andriis@wix.com',
-    companyName: 'wix'
+    companyName: 'wix',
+    redColor: '#FF0000'
   }
 
   beforeEach(() => {
@@ -30,6 +34,9 @@ describe('Business Card Editor', () => {
     inputSideDriver = businessCardDriver.getInputSideDriver()
     resultSideDriver = businessCardDriver.getResultSideDriver()
     backSideDriver = businessCardDriver.getBackSideDriver()
+    backgroundDriverFront = businessCardDriver.getBackgroundDriver('frontBackgroundImage')
+    backgroundDriverBack = businessCardDriver.getBackgroundDriver('backBackgroundImage')
+    backgroundDriverLogo = businessCardDriver.getBackgroundDriver('logo')
   })
 
 
@@ -125,4 +132,17 @@ describe('Business Card Editor', () => {
     }
   })
 
+  test('should change color of result-front box after color  in colorpicker was changed',async function(){
+    inputSideDriver.toggleFrontSideBackground()
+    const awaitBackgroundRender =  await eventually(() => expect(appDriver.getBackgroundComponentByHook('frontBackgroundImage')).toBeTruthy())
+    if(awaitBackgroundRender){
+      backgroundDriverFront.changeColor(person.redColor)
+      //fron container in result driver should have redColor after this
+      await eventually(() => expect(resultSideDriver.getColorFront().toEqual(person.redColor)))
+    }
+  })
+
+  test('should change color of result-back box after color was changed',async function(){
+
+  })
 })

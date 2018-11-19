@@ -8,4 +8,5 @@ module.exports = el => ({
   getTelephone: () => byDataHook(el, 'telephone-text').textContent,
   getEmail: () => byDataHook(el, 'email-text').textContent,
   getCompanyName: () => byDataHook(el,'companyName-text').textContent,
+  getColorFront: () => byDataHook(el,'result-front').style.background
 })
