@@ -1,16 +1,34 @@
 import React from 'react'
 import ColorPicker from 'wix-style-react/ColorPicker'
+import Button from 'wix-style-react/Button'
+import Modal from 'wix-style-react/Modal'
+import { MessageBoxFunctionalLayout } from 'wix-style-react/MessageBox'
+import { flickrActions } from '../actions'
+import { connect } from 'react-redux'
 
-export class BackgroundContainer extends React.Component {
+
+class BackgroundContainer extends React.Component {
     constructor(props) {
         super(props)
+        this.closeModal = this.closeModal.bind(this)
+        this.state = {
+            isOpenBackgroundModal: false,
+            isBackgroundTabOpen: false
+        }
+    }
+
+    closeModal() {
+        this.setState({ isOpenBackgroundModal: false })
     }
 
     render(){
-        const {  imageType,color,changeColorBackground  } = this.props
+        const {  imageType,color,changeColorBackground,image  } = this.props
+        const { closeModal } = this
+        const setState = state => () => this.setState(state)
+        const openBackgroundModal = setState({ isOpenBackgroundModal: true })
         return (
             <div data-hook={imageType}>
-                Hello background with {imageType}
+                {!image && <div className="mini-image" style={{ backgroundColor: color ? color : 'green' }}></div>}
                 {color && <div>
                     <ColorPicker
                         onCancel={() => "Cancelled"}
@@ -21,9 +39,31 @@ export class BackgroundContainer extends React.Component {
                     />
                     <label for="isBackgroundTabOpen">Color</label>
                 </div>}
+                <div>
+                    <Button onClick={openBackgroundModal} dataHook={"open-modal-"+imageType}>Choose</Button>
+                    <Modal
+                        isOpen={this.state.isOpenBackgroundModal}
+                        onRequestClose={closeModal}
+                        contentLabel="Background modal example"
+                    >
+                        <MessageBoxFunctionalLayout
+                            cancelText="Cancel"
+                            confirmText="OK"
+                            dataHook={imageType+'Modal'}
+                            fullscreen
+                            onCancel={closeModal}
+                            onOk={closeModal}
+                            theme="blue"
+                            title="Full screen modal"
+                        >
+                            hello world
+                        </MessageBoxFunctionalLayout>
+                    </Modal>
+                </div>
             </div>
         )
     }
 }
 
-
+const connectedBackgroundContainer = connect()(BackgroundContainer)
+export { connectedBackgroundContainer as BackgroundContainer }

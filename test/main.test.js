@@ -163,19 +163,19 @@ describe('Business Card Editor', () => {
     if(awaitBackgroundRender){
       backgroundDriverFront.openModal('open-modal-frontBackgroundImage')
       await eventually(() => expect(byDataHook(document.body,('frontBackgroundImageModal'))).toBeTruthy())
-    } 
+    }
   })
 
   test('should open modal window for backBackground  image search',async function(){
     leftSideDriver.clickToggleSideVisibility()
     const awaitBackSideRender = await eventually(() => expect(leftSideDriver.getBackSide()).toBeTruthy());
-    if(awaitBackSideRender){
+    while(awaitBackSideRender){
       backSideDriver.toggleBackSideBackground()
       const awaitBackgroundRender =  await eventually(() => expect(appDriver.getBackgroundComponentByHook('backBackgroundImage')).toBeTruthy())
       if(awaitBackgroundRender){
         backgroundDriverBack.openModal('open-modal-backBackgroundImage')
-        await eventually(() => expect(byDataHook(document.body,('backBackgroundImageModal'))).toBeTruthy())
+        await eventually(() => expect(byDataHook(document.body,('backBackgroundImageModal'))).toEqual(1232))
       }
     }
-  })
+  });
 })
