@@ -3,6 +3,7 @@ const eventually = require('./eventually')
 const renderApp = require('../src/root.js').default
 const businessCardEditorDriverCreator = require('./drivers/bussinessCardEditorDriver')
 const store = require('../src/helpers')
+const byDataHook = require('./byDataHook')
 
 describe('Business Card Editor', () => {
   let businessCardDriver;
@@ -136,7 +137,7 @@ describe('Business Card Editor', () => {
     inputSideDriver.toggleFrontSideBackground()
     const awaitBackgroundRender =  await eventually(() => expect(appDriver.getBackgroundComponentByHook('frontBackgroundImage')).toBeTruthy())
     if(awaitBackgroundRender){
-      backgroundDriverFront.changeColor(person.redColor)
+      backgroundDriverFront.changeColor(person.redColor,'frontBackgroundImage')
       //fron container in result driver should have redColor after this
       await eventually(() => expect(resultSideDriver.getColorFront().toEqual(person.redColor)))
     }
@@ -146,8 +147,35 @@ describe('Business Card Editor', () => {
     leftSideDriver.clickToggleSideVisibility()
     const awaitBackSideRender = await eventually(() => expect(leftSideDriver.getBackSide()).toBeTruthy());
     if(awaitBackSideRender){
-      backgroundDriverBack.changeColor(person.redColor)
+      backgroundDriverBack.changeColor(person.redColor,'backBackgroundImage')
       await eventually(() => expect(resultSideDriver.getColorBack().toEqual(person.redColor)))
+    }
+  })
+
+  test('should open modal window for logo  image search',async function(){
+    backgroundDriverLogo.openModal('open-modal-logo')
+    await eventually(() => expect(byDataHook(document.body,('logoModal'))).toBeTruthy())
+  })
+
+  test('should open modal window for frontBackground  image search',async function(){
+    inputSideDriver.toggleFrontSideBackground()
+    const awaitBackgroundRender =  await eventually(() => expect(appDriver.getBackgroundComponentByHook('frontBackgroundImage')).toBeTruthy())
+    if(awaitBackgroundRender){
+      backgroundDriverFront.openModal('open-modal-frontBackgroundImage')
+      await eventually(() => expect(byDataHook(document.body,('frontBackgroundImageModal'))).toBeTruthy())
+    } 
+  })
+
+  test('should open modal window for backBackground  image search',async function(){
+    leftSideDriver.clickToggleSideVisibility()
+    const awaitBackSideRender = await eventually(() => expect(leftSideDriver.getBackSide()).toBeTruthy());
+    if(awaitBackSideRender){
+      backSideDriver.toggleBackSideBackground()
+      const awaitBackgroundRender =  await eventually(() => expect(appDriver.getBackgroundComponentByHook('backBackgroundImage')).toBeTruthy())
+      if(awaitBackgroundRender){
+        backgroundDriverBack.openModal('open-modal-backBackgroundImage')
+        await eventually(() => expect(byDataHook(document.body,('backBackgroundImageModal'))).toBeTruthy())
+      }
     }
   })
 })
