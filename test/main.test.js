@@ -143,6 +143,11 @@ describe('Business Card Editor', () => {
   })
 
   test('should change color of result-back box after color was changed',async function(){
-
+    leftSideDriver.clickToggleSideVisibility()
+    const awaitBackSideRender = await eventually(() => expect(leftSideDriver.getBackSide()).toBeTruthy());
+    if(awaitBackSideRender){
+      backgroundDriverBack.changeColor(person.redColor)
+      await eventually(() => expect(resultSideDriver.getColorBack().toEqual(person.redColor)))
+    }
   })
 })
