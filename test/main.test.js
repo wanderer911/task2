@@ -15,6 +15,7 @@ describe('Business Card Editor', () => {
   let backgroundDriverFront;
   let backgroundDriverBack;
   let backgroundDriverLogo;
+  let imageModalDriver;
 
   const person = {
     firstName: 'Andrii',
@@ -38,6 +39,7 @@ describe('Business Card Editor', () => {
     backgroundDriverFront = undefined;
     backgroundDriverBack = undefined;
     backgroundDriverLogo = undefined;
+    imageModalDriver = undefined;
   })
 
 
@@ -129,15 +131,15 @@ describe('Business Card Editor', () => {
     backSideDriver.toggleBackSideBackground()
     await eventually(() => expect(appDriver.getBackgroundComponentByHook('backBackgroundImage')).toBeTruthy())
   })
-
-  test('should change color of result-front box after color  in colorpicker was changed',async function(){
+  //this test will fall
+  test('should change color of result-front box after color  in colorpicker was changed.this test will fall',async function(){
     inputSideDriver.toggleFrontSideBackground()
     backgroundDriverFront = businessCardDriver.getBackgroundDriver('frontBackgroundImage')
     backgroundDriverFront.changeColor(person.redColor,'frontBackgroundImage')
     await eventually(() => expect(resultSideDriver.getColorFront()).toEqual(person.redColor))
   })
-
-  test('should change color of result-back box after color was changed',async function(){
+  //this test will fall
+  test('should change color of result-back box after color was changed.this test will fall',async function(){
     leftSideDriver.clickToggleSideVisibility()
     backgroundDriverBack = businessCardDriver.getBackgroundDriver('backBackgroundImage')
     backgroundDriverBack.changeColor(person.redColor,'backBackgroundImage')
@@ -167,4 +169,13 @@ describe('Business Card Editor', () => {
     console.log(byDataHook(document.body,'backBackgroundImageModal').textContent)
     await eventually(() => expect(byDataHook(document.body,'backBackgroundImageModal').textContent).toBeTruthy())
   });
+
+  test('should show images loading after the input in modal',async function (){
+    inputSideDriver.toggleFrontSideBackground()
+    backgroundDriverFront = businessCardDriver.getBackgroundDriver('frontBackgroundImage')
+    backgroundDriverFront.openModal('open-modal-frontBackgroundImage')
+    imageModalDriver = businessCardDriver.getImageModalDriver('image-modal-'+'frontBackgroundImage')
+    imageModalDriver.setSearchKeyWord(person.companyName)
+    await eventually(() => expect(imageModalDriver.getFlickrResult().textContent).toEqual('loading...'))
+  })
 })

@@ -9,5 +9,4 @@ module.exports = el => ({
     setTelephone: value => textInputDriverCreator(byDataHook(el, 'telephone-input')).setValue(value),
     setEmail: value => textInputDriverCreator(byDataHook(el, 'email-input')).setValue(value),
     toggleFrontSideBackground: () => checkBoxDriverCreator(el, 'frontVisilibility-checkbox').toggle(),
-    
 }) 
