@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import { form } from './form.reducer'
+import { flickr } from './flickr.reducer'
 
 const appReducer = combineReducers({
     form,
+    flickr
 })
 
 const rootReducer = (state,action) =>{

@@ -5,7 +5,7 @@ import Modal from 'wix-style-react/Modal'
 import { MessageBoxFunctionalLayout } from 'wix-style-react/MessageBox'
 import { flickrActions } from '../actions'
 import { connect } from 'react-redux'
-
+import { ImageModalContainer } from './imageModal.container'
 
 class BackgroundContainer extends React.Component {
     constructor(props) {
@@ -18,17 +18,18 @@ class BackgroundContainer extends React.Component {
     }
 
     closeModal() {
+        const { dispatch } = this.props
         this.setState({ isOpenBackgroundModal: false })
+        dispatch(flickrActions.clearImagesArray())
     }
 
-    render(){
-        const {  imageType,color,changeColorBackground,image  } = this.props
+    render() {
+        const { imageType, color, changeColorBackground, image } = this.props
         const { closeModal } = this
         const setState = state => () => this.setState(state)
         const openBackgroundModal = setState({ isOpenBackgroundModal: true })
         return (
             <div data-hook={imageType}>
-                {!image && <div className="mini-image" style={{ backgroundColor: color ? color : 'green' }}></div>}
                 {color && <div>
                     <ColorPicker
                         onCancel={() => "Cancelled"}
@@ -39,8 +40,13 @@ class BackgroundContainer extends React.Component {
                     />
                     <label for="isBackgroundTabOpen">Color</label>
                 </div>}
+
+
                 <div>
-                    <Button onClick={openBackgroundModal} dataHook={"open-modal-"+imageType}>Choose</Button>
+                    {!image && <div className="mini-image" style={{ backgroundColor: color ? color : 'green' }}></div>}
+                    {image && <img src={image} className="mini-image" />}
+                    <p>Image </p>
+                    <Button onClick={openBackgroundModal} dataHook={"open-modal-" + imageType}>Choose</Button>
                     <Modal
                         isOpen={this.state.isOpenBackgroundModal}
                         onRequestClose={closeModal}
@@ -49,14 +55,14 @@ class BackgroundContainer extends React.Component {
                         <MessageBoxFunctionalLayout
                             cancelText="Cancel"
                             confirmText="OK"
-                            dataHook={imageType+'Modal'}
+                            dataHook={imageType + 'Modal'}
                             fullscreen
                             onCancel={closeModal}
                             onOk={closeModal}
                             theme="blue"
                             title="Full screen modal"
                         >
-                            hello world
+                            <ImageModalContainer imageType={imageType} />
                         </MessageBoxFunctionalLayout>
                     </Modal>
                 </div>

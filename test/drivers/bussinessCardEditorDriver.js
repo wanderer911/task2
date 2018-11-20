@@ -14,5 +14,5 @@ module.exports = el => ({
     getResultSideDriver: () => resultSideDriver(byDataHook(el, 'result')),
     getBackSideDriver: () => backSideDriver(byDataHook(el, 'back-side')),
     getBackgroundDriver: (hook) => backgroundDriver(byDataHook(el, hook)),
-    getImageModal:(hook) => imageModalDriver(byDataHook(el, hook)),
+    getImageModalDriver:() => imageModalDriver(),
 })

@@ -31,7 +31,7 @@ class BackSideContainer extends React.Component {
     }
 
     render(){
-        const { companyName, isBackSideBackground,backBackroundColor } = this.props.form
+        const { companyName, backBackroundColor, backBackgroundImage, isBackSideBackground } = this.props.form
         return (<div data-hook="back-side">
             <TextField required>
                 <label for="companyName">Company</label>
