@@ -3,9 +3,6 @@ const colorPickerDriverCreator = require('../elementsDriver/colorPickerDriver')
 const btnClickDriver = require('../elementsDriver/btnClickDriver')
 
 module.exports = el => ({
-    changeColor: (value,hook) => {
-        console.log(el);
-        return colorPickerDriverCreator(byDataHook(el, hook)).setColor(value)
-    },
+    changeColor: (value) => colorPickerDriverCreator(el).setColor(value),
     openModal: (hook) => btnClickDriver(byDataHook(el, hook)).triggerClick()
 })

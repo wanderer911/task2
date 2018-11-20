@@ -34,10 +34,10 @@ describe('Business Card Editor', () => {
     leftSideDriver = businessCardDriver.getLeftSideDriver()
     inputSideDriver = businessCardDriver.getInputSideDriver()
     resultSideDriver = businessCardDriver.getResultSideDriver()
-    backSideDriver = businessCardDriver.getBackSideDriver()
-    backgroundDriverFront = businessCardDriver.getBackgroundDriver('frontBackgroundImage')
-    backgroundDriverBack = businessCardDriver.getBackgroundDriver('backBackgroundImage')
-    backgroundDriverLogo = businessCardDriver.getBackgroundDriver('logo')
+    backSideDriver = undefined;
+    backgroundDriverFront = undefined;
+    backgroundDriverBack = undefined;
+    backgroundDriverLogo = undefined;
   })
 
 
@@ -64,6 +64,7 @@ describe('Business Card Editor', () => {
   })
 
   test('should show BackSideContainer after toggleSideVisibility-button was clicked',async function (){
+    expect.assertions(2);
     leftSideDriver.clickToggleSideVisibility()
     await eventually(() => expect(leftSideDriver.getInputSide()).toBeFalsy()) 
     await eventually(() => expect(leftSideDriver.getBackSide()).toBeTruthy())
@@ -108,11 +109,9 @@ describe('Business Card Editor', () => {
 
   test('should change company name in resultSide after companyName input changed',async function(){
     leftSideDriver.clickToggleSideVisibility()
-    const awaitBackSideRender = await eventually(() => expect(leftSideDriver.getBackSide()).toBeTruthy());
-    if(awaitBackSideRender){
-      backSideDriver.setCompanyName(person.companyName)
-      await eventually(() => expect(resultSideDriver.getCompanyName()).toEqual(person.companyName))
-    }
+    backSideDriver = businessCardDriver.getBackSideDriver()
+    backSideDriver.setCompanyName(person.companyName)
+    await eventually(() => expect(resultSideDriver.getCompanyName()).toEqual(person.companyName))
   })
 
   test('should have backgroundComponent with logo opened',async function (){
@@ -126,56 +125,46 @@ describe('Business Card Editor', () => {
 
   test('should open BackgroundContainer on BackSide  for backBackgroundImage after checkbox clicked',async function (){
     leftSideDriver.clickToggleSideVisibility()
-    const awaitBackSideRender = await eventually(() => expect(leftSideDriver.getBackSide()).toBeTruthy());
-    if(awaitBackSideRender){
-      backSideDriver.toggleBackSideBackground()
-      await eventually(() => expect(appDriver.getBackgroundComponentByHook('backBackgroundImage')).toBeTruthy())
-    }
+    backSideDriver = businessCardDriver.getBackSideDriver()
+    backSideDriver.toggleBackSideBackground()
+    await eventually(() => expect(appDriver.getBackgroundComponentByHook('backBackgroundImage')).toBeTruthy())
   })
 
   test('should change color of result-front box after color  in colorpicker was changed',async function(){
     inputSideDriver.toggleFrontSideBackground()
-    const awaitBackgroundRender =  await eventually(() => expect(appDriver.getBackgroundComponentByHook('frontBackgroundImage')).toBeTruthy())
-    if(awaitBackgroundRender){
-      backgroundDriverFront.changeColor(person.redColor,'frontBackgroundImage')
-      //fron container in result driver should have redColor after this
-      await eventually(() => expect(resultSideDriver.getColorFront().toEqual(person.redColor)))
-    }
+    backgroundDriverFront = businessCardDriver.getBackgroundDriver('frontBackgroundImage')
+    backgroundDriverFront.changeColor(person.redColor,'frontBackgroundImage')
+    await eventually(() => expect(resultSideDriver.getColorFront()).toEqual(person.redColor))
   })
 
   test('should change color of result-back box after color was changed',async function(){
     leftSideDriver.clickToggleSideVisibility()
-    const awaitBackSideRender = await eventually(() => expect(leftSideDriver.getBackSide()).toBeTruthy());
-    if(awaitBackSideRender){
-      backgroundDriverBack.changeColor(person.redColor,'backBackgroundImage')
-      await eventually(() => expect(resultSideDriver.getColorBack().toEqual(person.redColor)))
-    }
+    backgroundDriverBack = businessCardDriver.getBackgroundDriver('backBackgroundImage')
+    backgroundDriverBack.changeColor(person.redColor,'backBackgroundImage')
+    await eventually(() => expect(resultSideDriver.getColorBack().toEqual(person.redColor)))
+    
   })
 
   test('should open modal window for logo  image search',async function(){
+    backgroundDriverLogo = businessCardDriver.getBackgroundDriver('logo')
     backgroundDriverLogo.openModal('open-modal-logo')
     await eventually(() => expect(byDataHook(document.body,('logoModal'))).toBeTruthy())
   })
 
   test('should open modal window for frontBackground  image search',async function(){
     inputSideDriver.toggleFrontSideBackground()
-    const awaitBackgroundRender =  await eventually(() => expect(appDriver.getBackgroundComponentByHook('frontBackgroundImage')).toBeTruthy())
-    if(awaitBackgroundRender){
-      backgroundDriverFront.openModal('open-modal-frontBackgroundImage')
-      await eventually(() => expect(byDataHook(document.body,('frontBackgroundImageModal'))).toBeTruthy())
-    }
+    backgroundDriverFront = businessCardDriver.getBackgroundDriver('frontBackgroundImage')
+    backgroundDriverFront.openModal('open-modal-frontBackgroundImage')
+    await eventually(() => expect(byDataHook(document.body,'frontBackgroundImageModal').textContent).toBeTruthy())
   })
 
   test('should open modal window for backBackground  image search',async function(){
     leftSideDriver.clickToggleSideVisibility()
-    const awaitBackSideRender = await eventually(() => expect(leftSideDriver.getBackSide()).toBeTruthy());
-    if(awaitBackSideRender){
-      backSideDriver.toggleBackSideBackground()
-      const awaitBackgroundRender =  await eventually(() => expect(appDriver.getBackgroundComponentByHook('backBackgroundImage')).toBeTruthy())
-      if(awaitBackgroundRender){
-        backgroundDriverBack.openModal('open-modal-backBackgroundImage')
-        await eventually(() => expect(byDataHook(document.body,('backBackgroundImageModal'))).toEqual(1232))
-      }
-    }
+    backSideDriver = businessCardDriver.getBackSideDriver()
+    backSideDriver.toggleBackSideBackground()
+    backgroundDriverBack = businessCardDriver.getBackgroundDriver('backBackgroundImage')
+    backgroundDriverBack.openModal('open-modal-backBackgroundImage')
+    console.log(byDataHook(document.body,'backBackgroundImageModal').textContent)
+    await eventually(() => expect(byDataHook(document.body,'backBackgroundImageModal').textContent).toBeTruthy())
   });
 })

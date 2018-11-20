@@ -4,6 +4,6 @@ module.exports = el => ({
   setColor: value => {
     const input = el.querySelector('input')
     input.value = value
-    triggerEvent(input, 'input')
+    triggerEvent(input, 'click')
   }
 })

@@ -10,5 +10,4 @@ module.exports = el => ({
   getCompanyName: () => byDataHook(el,'companyName-text').textContent,
   getColorFront: () => byDataHook(el,'result-front').style.backgroundColor,
   getColorBack: () => byDataHook(el,'result-back').style.backgroundColor,
-  
 })
